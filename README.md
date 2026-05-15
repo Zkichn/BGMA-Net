@@ -14,7 +14,7 @@
 <p align="center">
   <a href="https://www.sciencedirect.com/science/article/pii/S0925231225025251">Paper</a> |
   <a href="#quick-start">Quick Start</a> |
-  <a href="#results">Results</a> |
+  <a href="#experiments">Experiments</a> |
   <a href="#citation">Citation</a>
 </p>
 
@@ -40,7 +40,7 @@ Official PyTorch implementation of **BGMA-Net**, a blur-guided multi-attention n
 ## Method
 
 <p align="center">
-  <img src="assets/figures/overview.svg" width="92%" alt="Overall architecture of BGMA-Net with LRC">
+  <img src="assets/figures/architecture.svg" width="92%" alt="BGMA-Net architecture">
 </p>
 
 BGMA-Net is built around three components:
@@ -49,31 +49,82 @@ BGMA-Net is built around three components:
 2. **BGMA module** injects blur guidance into multi-scale feature learning and helps the network allocate more attention to degraded areas.
 3. **LRC framework** reconstructs left/right views through disparity warping and adds a stereo-consistency loss during training.
 
+## Experiments
+
+### Simulated Blur Settings
+
 <p align="center">
-  <img src="assets/figures/bgma_module.svg" width="70%" alt="BGMA module">
+  <img src="assets/figures/flotation_blur_levels.svg" width="88%" alt="Simulated defocus blur levels on flotation froth images">
 </p>
 
 <p align="center">
-  <img src="assets/figures/lrc_framework.svg" width="78%" alt="LRC framework">
+  <img src="assets/figures/holopix_blur_levels.svg" width="88%" alt="Simulated defocus blur levels on Holopix50k images">
 </p>
-
-## Results
 
 ### Holopix50k
 
 | Method | 25% Blur PSNR | 25% Blur SSIM | 50% Blur PSNR | 50% Blur SSIM | 75% Blur PSNR | 75% Blur SSIM |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| DPANet | 36.945 | **0.9847** | 34.006 | 0.9544 | 31.532 | 0.9263 |
+| Blur | 31.170 | 0.9407 | 27.820 | 0.8785 | 25.900 | 0.8159 |
+| DPDNet-S | 34.746 | 0.9646 | 31.510 | 0.9311 | 29.621 | 0.8951 |
+| IFAN | 34.984 | 0.9664 | 31.905 | 0.9359 | 29.749 | 0.8995 |
+| DeblurNet | 35.543 | 0.9689 | 32.017 | 0.9353 | 29.957 | 0.9010 |
+| GKMNet | 35.804 | 0.9701 | 32.101 | 0.9362 | 30.034 | 0.9032 |
+| MPT | 36.677 | 0.9752 | 33.328 | 0.9504 | 31.320 | 0.9217 |
 | BGMA-Net+ | 36.317 | 0.9731 | 33.214 | 0.9484 | 31.116 | 0.9212 |
+| DPDNet | 35.197 | 0.9694 | 32.135 | 0.9432 | 30.083 | 0.9090 |
+| DAVANet | 36.902 | 0.9765 | 33.372 | 0.9509 | 31.197 | 0.9222 |
+| DDDNet | 36.630 | 0.9751 | 33.516 | 0.9519 | 30.996 | 0.9188 |
+| BaMBNet | 36.900 | 0.9752 | 33.632 | 0.9517 | 31.331 | 0.9206 |
+| DPANet | 36.945 | **0.9847** | 34.006 | 0.9544 | 31.532 | 0.9263 |
 | **BGMA-Net\*** | **37.136** | 0.9763 | **34.318** | **0.9587** | **31.770** | **0.9292** |
 
 ### Flotation Froth Dataset
 
 | Method | 25% Blur PSNR | 25% Blur SSIM | 50% Blur PSNR | 50% Blur SSIM | 75% Blur PSNR | 75% Blur SSIM |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Blur | 34.434 | 0.9604 | 29.848 | 0.9166 | 27.760 | 0.8669 |
+| DPDNet-S | 39.342 | 0.9874 | 31.275 | 0.9228 | 29.148 | 0.8721 |
+| IFAN | 41.216 | 0.9905 | 32.781 | 0.9380 | 30.024 | 0.8785 |
+| DeblurNet | 41.451 | 0.9914 | 33.079 | 0.9418 | 30.135 | 0.8970 |
+| GKMNet | 42.949 | 0.9923 | 33.668 | 0.9436 | 31.552 | 0.9157 |
+| MPT | 43.813 | 0.9933 | 34.491 | 0.9541 | 32.757 | 0.9358 |
+| BGMA-Net+ | 43.171 | 0.9922 | 34.394 | 0.9561 | 31.625 | 0.9252 |
+| DPDNet | 41.453 | 0.9904 | 32.839 | 0.9394 | 31.363 | 0.9220 |
+| DAVANet | 43.797 | 0.9931 | 34.946 | 0.9461 | 32.079 | 0.9195 |
+| DDDNet | 41.567 | 0.9903 | 33.112 | 0.9427 | 31.735 | 0.9240 |
 | BaMBNet | 43.957 | 0.9934 | 35.129 | 0.9508 | 32.842 | 0.9361 |
 | DPANet | 44.189 | **0.9942** | 35.319 | 0.9595 | 32.925 | 0.9353 |
 | **BGMA-Net\*** | **44.322** | 0.9936 | **35.585** | **0.9625** | **33.227** | **0.9395** |
+
+### Efficiency
+
+| Method | Type | Params (M) | FLOPs (G) | Time (s) |
+| --- | --- | ---: | ---: | ---: |
+| DPDNet-S | Single | 31.44 | 59.61 | 0.322 |
+| IFAN | Single | 10.48 | 29.73 | 0.102 |
+| DeblurNet | Single | 4.59 | 37.02 | 0.232 |
+| GKMNet | Single | 1.41 | 21.06 | **0.035** |
+| MPT | Single | 19.80 | 76.00 | 0.518 |
+| BGMA-Net+ | Single | 4.03 | 35.74 | 0.220 |
+| DPDNet | Stereo | 31.44 | 97.22 | 0.523 |
+| DAVANet | Stereo | 8.68 | 89.60 | 0.560 |
+| DDDNet | Stereo | 7.45 | 169.57 | 0.925 |
+| BaMBNet | Stereo | 4.50 | 62.71 | 0.607 |
+| DPANet | Stereo | 62.47 | 219.37 | 0.965 |
+| **BGMA-Net\*** | Stereo | 8.07 | 71.48 | 0.457 |
+
+### Attention Analysis
+
+<p align="center">
+  <img src="assets/figures/attention_outputs.svg" width="92%" alt="Comparison of attention outputs between BGMA module and Attention U-Net">
+</p>
+
+<p align="center">
+  <img src="assets/figures/attention_heatmaps.svg" width="92%" alt="Comparison of attention heatmaps between Attention U-Net and BGMA-Net">
+</p>
+
+### Visual Comparisons
 
 <p align="center">
   <img src="assets/figures/qualitative_results.svg" width="95%" alt="Qualitative comparison">
@@ -83,21 +134,25 @@ BGMA-Net is built around three components:
   <img src="assets/figures/industrial_results.svg" width="92%" alt="Industrial defocus deblurring results">
 </p>
 
+<p align="center">
+  <img src="assets/figures/bad_cases.svg" width="92%" alt="Bad-case analysis">
+</p>
+
 ## Repository Layout
 
 ```text
 BGMA-Net/
-├── BGMA-Net/
-│   └── model/
-│       ├── BAWM.py       # Blur-aware weighting module
-│       ├── BGMA.py       # Blur-guided multi-attention module
-│       ├── LRC.py        # Left-right consistency loss utilities
-│       └── Network.py    # BGMA-Net backbone and stereo wrapper
-├── assets/
-│   └── figures/          # Paper figures for the project page
-├── CITATION.cff
-├── README.md
-└── requirements.txt
++-- BGMA-Net/
+|   +-- model/
+|       +-- BAWM.py       # Blur-aware weighting module
+|       +-- BGMA.py       # Blur-guided multi-attention module
+|       +-- LRC.py        # Left-right consistency loss utilities
+|       +-- Network.py    # BGMA-Net backbone and stereo wrapper
++-- assets/
+|   +-- figures/          # Paper figures for the project page
++-- CITATION.cff
++-- README.md
++-- requirements.txt
 ```
 
 ## Installation
