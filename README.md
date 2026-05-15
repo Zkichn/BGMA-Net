@@ -40,7 +40,7 @@ Official PyTorch implementation of **BGMA-Net**, a blur-guided multi-attention n
 ## Method
 
 <p align="center">
-  <img src="assets/figures/architecture.svg" width="92%" alt="BGMA-Net architecture">
+  <img src="assets/figures/overview.svg" width="92%" alt="Overall architecture of BGMA-Net with LRC">
 </p>
 
 BGMA-Net is built around three components:
