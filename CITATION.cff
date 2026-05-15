@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use BGMA-Net in your research, please cite this paper."
+title: "A blur-guided multi-attention network based on left-right consistency for gradual defocus deblurring in binocular images"
+authors:
+  - family-names: Chen
+    given-names: Zekai
+  - family-names: Tang
+    given-names: Zhaohui
+  - family-names: Zhong
+    given-names: Yuze
+  - family-names: Zhang
+    given-names: Hu
+  - family-names: Dai
+    given-names: Zhien
+  - family-names: Xie
+    given-names: Yongfang
+doi: 10.1016/j.neucom.2025.131853
+date-published: 2026-01-14
+journal: Neurocomputing
+volume: 661
+pages: "131853"
+repository-code: "https://github.com/Zkichn/BGMA-Net"
